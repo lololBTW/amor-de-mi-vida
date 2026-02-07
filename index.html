@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Corazón</title>
+</head>
+<body style="margin:0; background:black;">
+<canvas id="c" width="600" height="600"></canvas>
+
+<script>
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+
+ctx.translate(300, 300);
+ctx.strokeStyle = "red";
+
+function corazon(n) {
+    let x = 16 * Math.pow(Math.sin(n), 3);
+    let y = 13 * Math.cos(n)
+            - 5 * Math.cos(2*n)
+            - 2 * Math.cos(3*n)
+            - Math.cos(4*n);
+    return [x, -y];
+}
+
+for (let i = 0; i < 15; i++) {
+    ctx.beginPath();
+    for (let n = 0; n < 100; n += 2) {
+        let [x, y] = corazon(n / 10);
+        ctx.lineTo(x * i * 5, y * i * 5);
+    }
+    ctx.stroke();
+}
+</script>
+</body>
+</html>
