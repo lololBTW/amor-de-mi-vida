@@ -60,7 +60,7 @@ function draw() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.translate(canvas.width / 2, canvas.height / 2);
 
-  const pulse = 1 + 0.05 * Math.sin(t);
+  const pulse = 1 + 0.01 * Math.sin(t);
   ctx.strokeStyle = "red";
   ctx.lineWidth = scale * 2;
 
