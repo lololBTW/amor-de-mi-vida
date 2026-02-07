@@ -36,7 +36,6 @@ function resize() {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.translate(size / 2, size / 2);
 
-  // escala segura (ajustable)
   scale = size / 100;
 }
 resize();
@@ -54,8 +53,13 @@ function corazon(n) {
 let t = 0;
 
 function draw() {
+  // reset para limpiar todo el canvas real
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.fillStyle = "rgba(0,0,0,0.15)";
-  ctx.fillRect(-canvas.width/2, -canvas.height/2, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // volver a centrar
+  ctx.translate(canvas.width / 2, canvas.height / 2);
 
   const pulse = 1 + 0.05 * Math.sin(t);
   const hue = 350 + 10 * Math.sin(t);
