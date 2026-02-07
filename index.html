@@ -26,6 +26,7 @@
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
 
+const MAX_I = 15;
 let scale = 1;
 
 function resize() {
@@ -36,7 +37,8 @@ function resize() {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.translate(size / 2, size / 2);
 
-  scale = size / 100;
+  // margen de seguridad
+  scale = size / (MAX_I * 40);
 }
 resize();
 window.addEventListener("resize", resize);
@@ -53,21 +55,16 @@ function corazon(n) {
 let t = 0;
 
 function draw() {
-  // reset para limpiar todo el canvas real
   ctx.setTransform(1, 0, 0, 1, 0, 0);
-  ctx.fillStyle = "rgba(0,0,0,0.15)";
+  ctx.fillStyle = "rgba(0,0,0,0.2)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // volver a centrar
   ctx.translate(canvas.width / 2, canvas.height / 2);
 
   const pulse = 1 + 0.05 * Math.sin(t);
-  const hue = 350 + 10 * Math.sin(t);
+  ctx.strokeStyle = "red";
+  ctx.lineWidth = scale * 2;
 
-  ctx.strokeStyle = `hsl(${hue}, 100%, 60%)`;
-  ctx.lineWidth = scale * 0.5;
-
-  for (let i = 1; i <= 15; i++) {
+  for (let i = 1; i <= MAX_I; i++) {
     ctx.beginPath();
     for (let n = 0; n < Math.PI * 2; n += 0.05) {
       let [x, y] = corazon(n);
